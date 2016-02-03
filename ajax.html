@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Complete Web Developer</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style>
+    
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <p id="loadPageInfo"></p>
+
+            <button class="btn btn-warning" onclick="loadPage();">Load AJAX Page</button>
+        </div>
+    </div>
+</div>
+
+
+ <script>
+    function ajaxGetter() {
+        var ajax;
+        if(window.XMLHttpRequest) {
+            ajax = new XMLHttpRequest();
+        } else {
+            ajax = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        return ajax;
+
+    }
+
+     function loadPage() {
+         var ajaxReturned = ajaxGetter();
+
+         ajaxReturned.onreadystatechange = function() {
+             if(ajaxReturned.readyState === 4 && ajaxReturned.status === 200) {
+                 document.getElementById('loadPageInfo').innerHTML = ajaxReturned.responseText;
+             }
+         }
+         ajaxReturned.open("POST", "index.html", true);
+         ajaxReturned.send();
+     }
+</script>
+<!-- Latest compiled and minified JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
